@@ -10,7 +10,7 @@ services:
     build:
       context: ./frontend
       args:
-        - NEXT_PUBLIC_API_URL=http://13.60.173.123:8081/api/news
+        - NEXT_PUBLIC_API_URL=http://backend:8080/api/news
     container_name: bursatil-frontend
     ports:
       - "3000:3000"
