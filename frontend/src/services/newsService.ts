@@ -1,8 +1,8 @@
 import { NewsItem } from '@/types/news';
 
 export async function getNews(company?: string): Promise<NewsItem[]> {
-    // Usamos el nombre del servicio interno de Docker para la comunicación servidor a servidor
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://backend:8080/api/news';
+    // Forzamos la IP pública y el puerto 8081 para que el navegador pueda consultarlo externamente
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://13.60.173.123:8081/api/news';
     const url = company ? `${baseUrl}?company=${company}` : baseUrl;
 
     try {
