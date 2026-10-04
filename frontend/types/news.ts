@@ -1,0 +1,8 @@
+export interface NewsItem {
+    title: string;
+    description: string;
+    url: string;
+    publishedAt: string;
+    company: 'NVIDIA' | 'AMD';
+    source: string;
+}
