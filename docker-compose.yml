@@ -5,7 +5,7 @@ services:
     build: ./backend
     container_name: bursatil-backend
     ports:
-      - "8080:8080"
+      - "8081:8080"
     restart: always
 
   frontend:
@@ -14,7 +14,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://backend:8080/api/news
+      - NEXT_PUBLIC_API_URL=http://13.60.173.123:8081/api/news
     depends_on:
       - backend
     restart: always
