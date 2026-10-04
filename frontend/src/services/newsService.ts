@@ -1,22 +1,23 @@
 import { NewsItem } from '@/types/news';
 
 export async function getNews(company?: string): Promise<NewsItem[]> {
-    // Si estem a Docker, usarà http://backend:8080, sinó localhost
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/news';
+    // Usamos el nombre del servicio interno de Docker para la comunicación servidor a servidor
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://backend:8080/api/news';
     const url = company ? `${baseUrl}?company=${company}` : baseUrl;
 
     try {
         const res = await fetch(url, {
-            next: { revalidate: 60 }
+            cache: 'no-store' // Evitar caché estática para tener noticias en tiempo real
         });
 
         if (!res.ok) {
-            throw new Error('No s\'han pogut recuperar les notícies del servidor.');
+            console.error(`Error HTTP: ${res.status}`);
+            return [];
         }
 
         return res.json();
     } catch (error) {
-        console.error('Error fetching news:', error);
+        console.error('No se pudo conectar con el backend:', error);
         return [];
     }
 }
