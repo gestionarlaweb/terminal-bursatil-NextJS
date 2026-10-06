@@ -14,3 +14,8 @@ services:
     depends_on:
       - backend
     restart: always
+
+    networks:
+      default:
+        name: web-network
+        external: true
